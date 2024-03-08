@@ -1,0 +1,23 @@
+name: Docker Image CI
+
+on:
+  workflow_dispatch:
+    inputs: 
+      map_list:
+        description: 'Map List'
+        required: True
+        type: string
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag motomap:$(date +%s)
+  container-test-job:
+    runs-on: ubuntu-latest
+    container:
+      image: motomap:$(date +%s)
+    steps:
+      - name: Build maps
+        run: /motomap/motomap.sh
