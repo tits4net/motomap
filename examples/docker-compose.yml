@@ -1,0 +1,7 @@
+services:
+  motomap:
+    image: "docker.io/library/motomap"
+    volumes:
+      - ./data/output/:/motomap/output/
+    environment:
+      MAPS_LIST: "antarctica;europe/andorra;europe/france/guyane"
