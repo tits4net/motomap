@@ -2,11 +2,6 @@ name: Build map
 
 on:
   workflow_dispatch:
-    inputs:
-      map_list:
-      description: 'List of map to build (comma separated, according geofabrik path)'
-      required: True
-      type: string
 
 jobs:
   motomap-container-job:
