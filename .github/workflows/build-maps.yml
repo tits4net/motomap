@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       maps_list:
-        description: 'List of map to generate (comma separated, geofabrik path format)'
+        description: 'List of map to generate (semi-colon separated, geofabrik path format)'
         default: 'antarctica;europe/andorra;europe/france/guyane'
         required: true
         type: string
