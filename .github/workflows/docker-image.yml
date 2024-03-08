@@ -2,11 +2,7 @@ name: Docker build and push
 
 on:
   workflow_dispatch:
-    inputs: 
-      map_list:
-        description: 'Map List'
-        required: True
-        type: string
+  
 jobs:
   push_to_registry:
     name: Push Docker image to Docker Hub
@@ -18,7 +14,7 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Extract metadata (tags, labels) for Docker
