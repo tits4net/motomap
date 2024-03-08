@@ -13,13 +13,11 @@ jobs:
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
       env:
         MAP_LIST: ${{ github.event.inputs.map_list }}}}
-      volumes:
-        - /output_volume:/motomap/output
     steps:
       - name: Run script
-        run: ls -lsa /; ls -lsa /motomap; echo 1234 > /motomap/output/touch
+        run: bash /motomap/motomap/motomap.sh
       - name: Archive production artifacts
         uses: actions/upload-artifact@v4
         with:
           name: maps files
-          path: /output_volume
+          path: /motomap/output
