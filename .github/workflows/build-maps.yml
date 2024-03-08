@@ -3,25 +3,27 @@ name: Build map
 on:
   workflow_dispatch:
     inputs:
-      map_list:
-      description: 'List of map to build (comma separated, according geofabrik path)'
-      required: True
-      type: string
+      maps_list:
+        description: 'List of map to generate (comma separated, geofabrik path format)'
+        default: 'antarctica;europe/andorra;europe/france/guyane'
+        required: true
+        type: string
 
 jobs:
   motomap-container-job:
     runs-on: ubuntu-latest
     container:
       image: tmesot/motomap:refactor
+      credentials:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
       env:
-        MAP_LIST: ${{ github.event.inputs.map_list }}}}
-      volumes:
-        - /output_volume:/motomap/output
+        MAPS_LIST: ${{ github.event.inputs.maps_list }}
     steps:
       - name: Run script
-        run: /motomap/motomap.sh
+        run: bash /motomap/motomap/motomap.sh
       - name: Archive production artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: maps files
-          path: /output_volume
+          name: Generate map artefact
+          path: /motomap/output
