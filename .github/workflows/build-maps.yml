@@ -17,7 +17,7 @@ jobs:
         - /output_volume:/motomap/output
     steps:
       - name: Run script
-        run: ls -lsa; ps aux
+        run: ls -lsa /; ls -lsa /motomap; echo 1234 > /motomap/output/touch
       - name: Archive production artifacts
         uses: actions/upload-artifact@v4
         with:
