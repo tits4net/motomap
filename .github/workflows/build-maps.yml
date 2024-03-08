@@ -3,7 +3,7 @@ name: Build map
 on:
   workflow_dispatch:
     inputs:
-      map_list:
+      maps_list:
         description: 'List of map to generate (comma separated, geofabrik path format)'
         default: 'antarctica;europe/andorra;europe/france/guyane'
         required: true
@@ -18,12 +18,12 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
       env:
-        MAP_LIST: ${{ github.event.inputs.map_list }}}}
+        MAPS_LIST: ${{ github.event.inputs.maps_list }}}}
     steps:
       - name: Run script
         run: bash /motomap/motomap/motomap.sh
       - name: Archive production artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: maps files
+          name: Generate map artefact
           path: /motomap/output
