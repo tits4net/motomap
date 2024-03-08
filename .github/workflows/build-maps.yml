@@ -18,7 +18,7 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
       env:
-        MAPS_LIST: ${{ github.event.inputs.maps_list }}}}
+        MAPS_LIST: ${{ github.event.inputs.maps_list }}
     steps:
       - name: Run script
         run: bash /motomap/motomap/motomap.sh
