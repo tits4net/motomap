@@ -31,7 +31,7 @@ do
     mkdir -p workdir
     echo "INFO: Motomap Processing - Processing $element (name : ${final_name^})"
     echo "INFO: Motomap Processing - Download OSM map"
-    curl --output /motomap/workdir/map.osm.pbf https://download.geofabrik.de/"$element"-latest.osm.pbf
+    curl -L --output /motomap/workdir/map.osm.pbf https://download.geofabrik.de/"$element"-latest.osm.pbf
 
     echo "INFO: Motomap Processing - Splitting Map"
     # split each pbf file into segments so we don't run out of memory
