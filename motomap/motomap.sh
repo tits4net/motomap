@@ -40,7 +40,7 @@ do
 
     echo "INFO: Motomap Processing - Generating Map"
     # gen the .img file from the split files
-    java -Xms4G -Xmx4G -jar /motomap/mkgmap/mkgmap-r4918/mkgmap.jar --mapname="63241601" --family-id="17001" --family-name="Motomap - ${final_name^}" --description="Motomap - ${final_name^}" --output-dir=/motomap/workdir/ --precomp-sea=/motomap/precomp-sea/sea-latest.zip --generate-sea --route --housenumbers -c /motomap/motomap/motomap.cfg /motomap/workdir/6324*.osm.pbf /motomap/motomap/design/"${MAPS_DESIGN}"/typ/mapnik.txt
+    java -Xms4G -Xmx4G -jar /motomap/mkgmap/mkgmap-r4918/mkgmap.jar --mapname="63241601" --family-id="17001" --family-name="Motomap - ${final_name^}" --description="Motomap - ${final_name^}" --output-dir=/motomap/workdir/ --precomp-sea=/motomap/precomp-sea/sea-latest.zip --bounds=/motomap/bounds/bounds-latest.zip --generate-sea --route --housenumbers -c /motomap/motomap/motomap.cfg /motomap/workdir/6324*.osm.pbf /motomap/motomap/design/"${MAPS_DESIGN}"/typ/mapnik.txt
     mv workdir/gmapsupp.img /motomap/output/"$final_name".img
 
     # clean up
