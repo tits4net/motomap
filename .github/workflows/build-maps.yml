@@ -18,7 +18,7 @@ jobs:
   motomap-container-job:
     runs-on: ubuntu-latest
     container:
-      image: tmesot/motomap:latest
+      image: tmesot/motomap:main
       credentials:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
