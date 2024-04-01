@@ -14,7 +14,10 @@ fi
 
 #record our start date/time
 startDatetime=$(date)
-echo "INFO: Motomap Processing - Started"
+echo "INFO: Motomap Processing - Started with design : ${MAPS_DESIGN}"
+
+# Hook selected design
+sed -i "s/^style-file=.*/style-file=\/motomap\/motomap\/design\/${MAPS_DESIGN}\/style\//" /motomap/motomap/motomap.cfg
 
 # jump into the motomap base dir so we can find all our stuff
 cd /motomap/
@@ -37,7 +40,7 @@ do
 
     echo "INFO: Motomap Processing - Generating Map"
     # gen the .img file from the split files
-    java -Xms4G -Xmx4G -jar /motomap/mkgmap/mkgmap-r4918/mkgmap.jar --mapname="63241601" --family-id="17001" --family-name="Motomap - ${final_name^}" --description="Motomap - ${final_name^}" --output-dir=/motomap/workdir/ --precomp-sea=/motomap/precomp-sea/sea-latest.zip --generate-sea --route --housenumbers -c /motomap/motomap/motomap.cfg /motomap/workdir/6324*.osm.pbf /motomap/motomap/typ/mapnik.txt
+    java -Xms4G -Xmx4G -jar /motomap/mkgmap/mkgmap-r4918/mkgmap.jar --mapname="63241601" --family-id="17001" --family-name="Motomap - ${final_name^}" --description="Motomap - ${final_name^}" --output-dir=/motomap/workdir/ --precomp-sea=/motomap/precomp-sea/sea-latest.zip --generate-sea --route --housenumbers -c /motomap/motomap/motomap.cfg /motomap/workdir/6324*.osm.pbf /motomap/motomap/design/"${MAPS_DESIGN}"/typ/mapnik.txt
     mv workdir/gmapsupp.img /motomap/output/"$final_name".img
 
     # clean up

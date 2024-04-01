@@ -3,6 +3,9 @@ FROM ibmjava:sfj
 
 # Set configuration, default to some basic (light) examples
 ENV MAPS_LIST "antarctica;europe/andorra;europe/france/guyane"
+# Map style and typ, currently supported : default,motomap,roue-libre
+ENV MAPS_DESIGN "default"
+# Map builder versions
 ENV MKGMAP_VERSION="r4918"
 ENV SPLITTER_VERSION="r653"
 

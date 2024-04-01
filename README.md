@@ -6,5 +6,5 @@ This repo forked it to simplify and automatize docker build of builder container
 You can build the container using `make`
 Then you can run it either via `docker-compose`, see example file or via `docker run` as follow : 
 ```shell
-docker run -it -e MAPS_LIST=europe/france/reunion -v /tmp/motomap:/motomap/output/ motomap
+docker run -it -e MAPS_LIST=europe/france/reunion -e MAPS_DESIGN=default -v /tmp/motomap:/motomap/output/ motomap
 ```

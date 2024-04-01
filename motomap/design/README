@@ -1,0 +1,11 @@
+TYP file :
+- default : use mapnik.txt provided by last mkgmap version
+- motomap : use mapnik.txt provided by motomap project (https://github.com/markcushman/motomap)
+- roue-libre: use mapnik.txt provided by last mkgmap version
+
+Style files:
+- default : use mapnik.txt provided by last mkgmap version
+- motomap : use mapnik.txt provided by motomap project (https://github.com/markcushman/motomap)
+- roue-libre: use mapnik.txt provided by last mkgmap version with custom modification
+-- Prefix water and toilets
+-- Add vet and animal boarding amenity

@@ -5,3 +5,4 @@ services:
       - ./data/output/:/motomap/output/
     environment:
       MAPS_LIST: "antarctica;europe/andorra;europe/france/guyane"
+      MAPS_DESIGN: "motomap"
