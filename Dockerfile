@@ -23,7 +23,7 @@ RUN mkdir -p /motomap/splitter && \
     curl --output /motomap/splitter/splitter.zip https://www.mkgmap.org.uk/download/splitter-${SPLITTER_VERSION}.zip && \
     unzip -d /motomap/splitter/ /motomap/splitter/splitter.zip
 
-# Download global usefull dataset
+# Download global useful dataset
 # precomp-sea
 RUN mkdir -p /motomap/precomp-sea && \
     curl --output /motomap/precomp-sea/sea-latest.zip https://www.thkukuk.de/osm/data/sea-latest.zip
