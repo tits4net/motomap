@@ -8,6 +8,11 @@ on:
         default: 'antarctica;europe/andorra;europe/france/guyane'
         required: true
         type: string
+      maps_design:
+        description: 'Design to use for generated map'
+        default: 'default'
+        required: true
+        type: string
 
 jobs:
   motomap-container-job:
@@ -19,6 +24,7 @@ jobs:
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
       env:
         MAPS_LIST: ${{ github.event.inputs.maps_list }}
+        MAPS_DESIGN: ${{ github.event.inputs.maps_design }}
     steps:
       - name: Run script
         run: bash /motomap/motomap/motomap.sh
