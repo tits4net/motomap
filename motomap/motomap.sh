@@ -14,7 +14,7 @@ fi
 
 #record our start date/time
 startDatetime=$(date)
-echo "INFO: Motomap Processing - Started with design : ${MAPS_DESIGN}"
+echo "INFO: Motomap Processing - Started with design : ${MAPS_DESIGN} for ${MAPS_LIST}"
 
 # Hook selected design
 sed -i "s/^style-file=.*/style-file=\/motomap\/motomap\/design\/${MAPS_DESIGN}\/style\//" /motomap/motomap/motomap.cfg
