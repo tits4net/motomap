@@ -36,7 +36,7 @@ do
     echo "INFO: Motomap Processing - Splitting Map"
     # split each pbf file into segments so we don't run out of memory
     # allocating max of 4G heap space
-    java -Xms4G -Xmx4G -jar /motomap/splitter/splitter-r653/splitter.jar --output-dir="/motomap/workdir/" /motomap/workdir/map.osm.pbf
+    java -Xms4G -Xmx4G -jar /motomap/splitter/splitter-r653/splitter.jar --max-nodes=1400000 --output-dir="/motomap/workdir/" /motomap/workdir/map.osm.pbf
 
     echo "INFO: Motomap Processing - Generating Map"
     # gen the .img file from the split files
