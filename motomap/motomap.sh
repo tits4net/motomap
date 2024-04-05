@@ -15,6 +15,11 @@ fi
 #record our start date/time
 startDatetime=$(date)
 echo "INFO: Motomap Processing - Started with design : ${MAPS_DESIGN} for ${MAPS_LIST}"
+# compute uniq family-id and mapname
+random_base=$((1 + RANDOM % 1000))
+family_id=$(( 17000 + random_base))
+map_id=$(( 63241600 + random_base))
+echo "INFO: Computing uniq value : family_id = ${family_id}, map_id = ${map_id}"
 
 # Hook selected design
 sed -i "s/^style-file=.*/style-file=\/motomap\/motomap\/design\/${MAPS_DESIGN}\/style\//" /motomap/motomap/motomap.cfg
@@ -29,7 +34,10 @@ for element in "${map_array[@]}"
 do
     final_name=$(basename "$element")
     mkdir -p workdir
+    family_id=$(( family_id + 1 ))
+    map_id=$(( map_id + 1))
     echo "INFO: Motomap Processing - Processing $element (name : ${final_name^})"
+    echo "INFO: family_id = ${family_id}, map_id = ${map_id}"
     echo "INFO: Motomap Processing - Download OSM map"
     curl -L --output /motomap/workdir/map.osm.pbf https://download.geofabrik.de/"$element"-latest.osm.pbf
 
@@ -40,7 +48,7 @@ do
 
     echo "INFO: Motomap Processing - Generating Map"
     # gen the .img file from the split files
-    java -Xms4G -Xmx4G -jar /motomap/mkgmap/mkgmap-r4918/mkgmap.jar --mapname="63241601" --family-id="17001" --family-name="Motomap - ${final_name^}" --description="Motomap - ${final_name^}" --output-dir=/motomap/workdir/ --precomp-sea=/motomap/precomp-sea/sea-latest.zip --bounds=/motomap/bounds/bounds-latest.zip --generate-sea --route --housenumbers -c /motomap/motomap/motomap.cfg /motomap/workdir/6324*.osm.pbf /motomap/motomap/design/"${MAPS_DESIGN}"/typ/mapnik.txt
+    java -Xms4G -Xmx4G -jar /motomap/mkgmap/mkgmap-r4918/mkgmap.jar --mapname="${map_id}" --family-id="${family_id}" --family-name="Motomap - ${final_name^}" --description="Motomap - ${final_name^}" --output-dir=/motomap/workdir/ --precomp-sea=/motomap/precomp-sea/sea-latest.zip --bounds=/motomap/bounds/bounds-latest.zip --generate-sea --route --housenumbers -c /motomap/motomap/motomap.cfg /motomap/workdir/6324*.osm.pbf /motomap/motomap/design/"${MAPS_DESIGN}"/typ/mapnik.txt
     mv workdir/gmapsupp.img /motomap/output/"$final_name".img
 
     # clean up
