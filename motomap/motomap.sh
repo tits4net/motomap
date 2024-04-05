@@ -35,7 +35,7 @@ do
     final_name=$(basename "$element")
     mkdir -p workdir
     family_id=$(( family_id + 1 ))
-    map_id=$(( map_id + 1))
+    map_id=$(( map_id + 1000))
     echo "INFO: Motomap Processing - Processing $element (name : ${final_name^})"
     echo "INFO: family_id = ${family_id}, map_id = ${map_id}"
     echo "INFO: Motomap Processing - Download OSM map"
@@ -44,11 +44,11 @@ do
     echo "INFO: Motomap Processing - Splitting Map"
     # split each pbf file into segments so we don't run out of memory
     # allocating max of 4G heap space
-    java -Xms4G -Xmx4G -jar /motomap/splitter/splitter-r653/splitter.jar --max-nodes=1400000 --output-dir="/motomap/workdir/" /motomap/workdir/map.osm.pbf
+    java -Xms4G -Xmx4G -jar /motomap/splitter/splitter-r653/splitter.jar --max-nodes=1400000 --mapid="${map_id}" --output-dir="/motomap/workdir/" /motomap/workdir/map.osm.pbf
 
     echo "INFO: Motomap Processing - Generating Map"
     # gen the .img file from the split files
-    java -Xms4G -Xmx4G -jar /motomap/mkgmap/mkgmap-r4918/mkgmap.jar --mapname="${map_id}" --family-id="${family_id}" --family-name="Motomap - ${final_name^}" --description="Motomap - ${final_name^}" --output-dir=/motomap/workdir/ --precomp-sea=/motomap/precomp-sea/sea-latest.zip --bounds=/motomap/bounds/bounds-latest.zip --generate-sea --route --housenumbers --name-tag-list=name:en,int_name,name -c /motomap/motomap/motomap.cfg /motomap/workdir/6324*.osm.pbf /motomap/motomap/design/"${MAPS_DESIGN}"/typ/mapnik.txt
+    java -Xms4G -Xmx4G -jar /motomap/mkgmap/mkgmap-r4918/mkgmap.jar --mapname="${map_id}" --family-id="${family_id}" --family-name="Motomap - ${final_name^}" --description="Motomap - ${final_name^}" --output-dir=/motomap/workdir/ --precomp-sea=/motomap/precomp-sea/sea-latest.zip --bounds=/motomap/bounds/bounds-latest.zip --generate-sea --route --housenumbers --name-tag-list=name:en,int_name,name -c /motomap/motomap/motomap.cfg /motomap/workdir/6*.osm.pbf /motomap/motomap/design/"${MAPS_DESIGN}"/typ/mapnik.txt
     mv workdir/gmapsupp.img /motomap/output/"$final_name".img
 
     # clean up
